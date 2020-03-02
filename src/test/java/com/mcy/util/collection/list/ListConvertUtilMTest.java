@@ -13,7 +13,7 @@ import java.util.List;
  * @version 1.0
  * @date 2020/3/2 4:30 下午
  */
-public class ListConvertUtilTest {
+public class ListConvertUtilMTest {
     private List<Integer> testList;
 
     @Test

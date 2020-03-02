@@ -5,7 +5,7 @@ package com.mcy.util.core.collection.springcharacteristic.example;
  * @version 1.0
  * @date 2020/3/2 8:11 下午
  */
-public interface Test<T> {
+public interface MTest<T> {
 
     void test(T t);
 

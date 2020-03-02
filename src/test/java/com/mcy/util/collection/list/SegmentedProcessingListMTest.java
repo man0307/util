@@ -12,7 +12,7 @@ import java.util.List;
  * @version 1.0
  * @date 2020/3/1 6:24 下午
  */
-public class SegmentedProcessingListTest {
+public class SegmentedProcessingListMTest {
 
     private List<Integer> testList;
 
