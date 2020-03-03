@@ -6,6 +6,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.ResolvableType;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author chaoyang.man
@@ -44,11 +48,29 @@ public class ObtainBeanUtil implements ApplicationContextAware {
      * @return 结果Bean
      */
     public <T> T getGenericsType(Class<T> clazz, Class genericClazz) {
+        if (Objects.isNull(clazz) || Objects.isNull(genericClazz)) {
+            return null;
+        }
         String[] beanNames = applicationContext.getBeanNamesForType(ResolvableType.forClassWithGenerics(clazz, genericClazz));
         if (StringUtils.isBlank(beanNames[0])) {
             return null;
         }
         return (T) applicationContext.getBean(beanNames[0]);
+    }
+
+    /**
+     * 根据接口类对象获取其实现的Bean的list
+     *
+     * @param type 接口类对象
+     * @param <T>  接口
+     * @return 实现类对象
+     */
+    public <T> List<T> get(Class<T> type) {
+        Map<String, T> beansOfType = applicationContext.getBeansOfType(type);
+        if (CollectionUtils.isEmpty(beansOfType)) {
+            return Collections.emptyList();
+        }
+        return new ArrayList<>(beansOfType.values());
     }
 
 
