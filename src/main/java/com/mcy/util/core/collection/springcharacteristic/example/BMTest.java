@@ -8,10 +8,11 @@ import org.springframework.stereotype.Component;
  * @date 2020/3/2 8:11 下午
  */
 @Component
+@MTestAnnotation
 public class BMTest implements MTest<String> {
 
     @Override
-    public void test(String s) {
+    public void test() {
         System.out.println("String");
     }
 }

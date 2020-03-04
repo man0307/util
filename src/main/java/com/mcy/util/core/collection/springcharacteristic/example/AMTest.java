@@ -8,10 +8,11 @@ import org.springframework.stereotype.Component;
  * @date 2020/3/2 8:11 下午
  */
 @Component
+@MTestAnnotation
 public class AMTest implements MTest<Integer> {
 
     @Override
-    public void test(Integer code) {
+    public void test() {
         System.out.println("Integer");
     }
 

@@ -8,8 +8,8 @@ import org.springframework.core.ResolvableType;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import java.lang.annotation.Annotation;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author chaoyang.man
@@ -65,12 +65,31 @@ public class ObtainBeanUtil implements ApplicationContextAware {
      * @param <T>  接口
      * @return 实现类对象
      */
-    public <T> List<T> get(Class<T> type) {
+    public <T> List<T> getBeansWithInterface(Class<T> type) {
         Map<String, T> beansOfType = applicationContext.getBeansOfType(type);
         if (CollectionUtils.isEmpty(beansOfType)) {
             return Collections.emptyList();
         }
         return new ArrayList<>(beansOfType.values());
+    }
+
+
+    /**
+     * 根据注解拿到所有注解了该注解的Bean
+     *
+     * @param annotationType 注解类型
+     * @return 被注解的对象
+     */
+    public List<Object> getBeansWithAnnotation(Class<? extends Annotation> annotationType) {
+        Map<String, Object> beansOfType = applicationContext.getBeansWithAnnotation(annotationType);
+        if (CollectionUtils.isEmpty(beansOfType)) {
+            return Collections.emptyList();
+        }
+        List<Object> result = new ArrayList<>();
+        beansOfType.forEach((name, bean) -> {
+            result.add(bean);
+        });
+        return result;
     }
 
 
